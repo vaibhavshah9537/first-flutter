@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp>{
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('My First App'),
+          title: Text('My First Flutter App'),
           centerTitle: true,
           backgroundColor: Color(0xff00BCD1),
         ),
