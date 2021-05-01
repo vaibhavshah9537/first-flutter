@@ -26,7 +26,22 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget build(BuildContext context) {
-    var questions = ['What\'s divya nick name?', 'What\'s kevin nick name?'];
+    // var questions = ['What\'s divya nick name?', 'What\'s kevin nick name?'];
+
+    var questions = [
+      {
+        'questionText': 'What\'s divya nick name?',
+        'answers': ['Motu', 'Chottu', 'Khotu']
+      },
+      {
+        'questionText': 'What\'s kevin nick name?',
+        'answers': ['Liti', 'Jadiyo', 'Padiyo']
+      },
+      {
+        'questionText': 'What\'s maitri nick name?',
+        'answers': ['Chokdi', 'Mota manso', 'Neelu']
+      },
+    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -36,13 +51,10 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Question(questions[questionIndex]),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
-            Answer(_answerQuestion),
-            // ElevatedButton(child: Text('Option 1'), onPressed: _answerQuestion),
-            // ElevatedButton(child: Text('Option 2'), onPressed: _answerQuestion),
-            // ElevatedButton(child: Text('Option 3'), onPressed: _answerQuestion),
+            Question(questions[questionIndex]['questionText']),
+            ...(questions[questionIndex]['answers'] as List<String>).map((answer){
+              return Answer(this._answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),
