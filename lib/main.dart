@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import './question.dart';
 import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 // void main() {
 //   runApp(MyApp());
 // }
@@ -17,31 +19,31 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var questionIndex = 0;
+  var _questionIndex = 0;
+  final _questions = const [
+    {
+      'questionText': 'What\'s divya nick name?',
+      'answers': ['Motu', 'Chottu', 'Khotu']
+    },
+    {
+      'questionText': 'What\'s kevin nick name?',
+      'answers': ['Liti', 'Jadiyo', 'Padiyo']
+    },
+    {
+      'questionText': 'What\'s maitri nick name?',
+      'answers': ['Chokdi', 'Mota manso', 'Neelu']
+    },
+  ];
 
   void _answerQuestion() {
     setState(() {
-      questionIndex++;
+      _questionIndex++;
     });
   }
 
   Widget build(BuildContext context) {
     // var questions = ['What\'s divya nick name?', 'What\'s kevin nick name?'];
 
-    var questions = [
-      {
-        'questionText': 'What\'s divya nick name?',
-        'answers': ['Motu', 'Chottu', 'Khotu']
-      },
-      {
-        'questionText': 'What\'s kevin nick name?',
-        'answers': ['Liti', 'Jadiyo', 'Padiyo']
-      },
-      {
-        'questionText': 'What\'s maitri nick name?',
-        'answers': ['Chokdi', 'Mota manso', 'Neelu']
-      },
-    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -49,14 +51,9 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
           backgroundColor: Color(0xff00BCD1),
         ),
-        body: Column(
-          children: [
-            Question(questions[questionIndex]['questionText']),
-            ...(questions[questionIndex]['answers'] as List<String>).map((answer){
-              return Answer(this._answerQuestion, answer);
-            }).toList()
-          ],
-        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(questionIndex: _questionIndex, questions: _questions, answerQuestion: _answerQuestion)
+            : Result(),
       ),
     );
   }
