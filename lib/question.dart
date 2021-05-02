@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
-class Question extends StatelessWidget{
-  var questions = ['What\'s divya nick name?', 'What\'s kevin nick name?'];
-  // final String questionText;
-  final int index;
-  Question(this.index);
+class Question extends StatelessWidget {
+  final String questionText;
+  // final int index;
+  Question(this.questionText);
 
-  Widget build(BuildContext context){
-    return Text(questions[index]);
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.all(10),
+      child: Text(
+        this.questionText,
+        style: TextStyle(
+          fontSize: 28,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }
